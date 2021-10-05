@@ -9,6 +9,7 @@
 <script>
 // @ is an alias to /src
 import axios from "../plugins/axios";
+import Cookie from "js-cookie";
 
 export default {
   name: "Home",
@@ -31,7 +32,8 @@ export default {
     },
     logout() {
       axios.post(`${process.env.VUE_APP_API_URL}/api/auth/logout`).then(() => {
-        localStorage.removeItem("isLogged");
+        Cookie.remove('token');
+
         this.$router.push({ name: "Login" });
       });
     }

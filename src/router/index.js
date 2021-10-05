@@ -2,25 +2,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import Authenticated from '../middlewares/Authenticated';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
-    meta: {
-      requiresVisitor: true
-    }
   },
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: Home,
-    meta: {
-      requiresAuth: true
-    }
+    beforeEnter: Authenticated.authenticated,
   }
 ]
 
